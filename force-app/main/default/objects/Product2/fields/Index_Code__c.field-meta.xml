@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Index_Code__c</fullName>
+    <description>20252 - this is Selim&apos;s
+33430 - this is Engineering&apos;s
+40493 - this is CAPE&apos;s</description>
+    <externalId>false</externalId>
+    <inlineHelpText>20252 - this is Selim&apos;s
+33430 - this is Engineering&apos;s
+40493 - this is CAPE&apos;s</inlineHelpText>
+    <label>Index Code</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>20252</fullName>
+                <default>false</default>
+                <label>20252 (Selim Center)</label>
+            </value>
+            <value>
+                <fullName>33430</fullName>
+                <default>false</default>
+                <label>33430 (Engineering)</label>
+            </value>
+            <value>
+                <fullName>40493</fullName>
+                <default>false</default>
+                <label>40493 (CAPE)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

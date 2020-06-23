@@ -1,0 +1,23 @@
+minimum_cumulusci_version: '3.14.0'
+project:
+    name: CAPE-Feed
+    package:
+        name:  CAPE-Feed
+        api_version: '48.0'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/CAPE-Feed/tests
+            options:
+                outputdir: robot/CAPE-Feed/results
+
+    robot_testdoc:
+        options:
+            path: robot/CAPE-Feed/tests
+            output: robot/CAPE-Feed/doc/CAPE-Feed_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75

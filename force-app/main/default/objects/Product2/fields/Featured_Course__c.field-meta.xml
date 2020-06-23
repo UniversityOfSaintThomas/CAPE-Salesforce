@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Featured_Course__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checkbox to identify if this is a featured course and it&apos;ll display as a primary course offering</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Set to true if the course should be one of the 3 featured courses on cape.stthomas.edu</inlineHelpText>
+    <label>Featured Course</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

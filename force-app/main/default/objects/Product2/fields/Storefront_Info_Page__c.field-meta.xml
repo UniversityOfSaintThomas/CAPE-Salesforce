@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Storefront_Info_Page__c</fullName>
+    <description>Link to the course Info Page or Storefront Page</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Link to the course Info Page or Storefront Page</inlineHelpText>
+    <label>Storefront/Info Page</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Url</type>
+</CustomField>

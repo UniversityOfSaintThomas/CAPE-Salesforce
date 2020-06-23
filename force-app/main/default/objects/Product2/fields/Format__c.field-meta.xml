@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Format__c</fullName>
+    <description>How is the class being administered.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How the class is being administered.</inlineHelpText>
+    <label>Format</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Online: Self-Guided</fullName>
+                <default>false</default>
+                <label>Online: Self-Guided</label>
+            </value>
+            <value>
+                <fullName>Online: Instructor-Guided</fullName>
+                <default>false</default>
+                <label>Online: Instructor-Guided</label>
+            </value>
+            <value>
+                <fullName>Face-to-Face</fullName>
+                <default>false</default>
+                <label>Face-to-Face</label>
+            </value>
+            <value>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+                <label>Webinar</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
