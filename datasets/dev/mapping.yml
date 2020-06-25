@@ -1,0 +1,25 @@
+Insert Product2:
+  sf_object: Product2
+  table: Product2
+  fields:
+    Id: sf_id
+    Name: Name
+    Activity_Code__c: Activity_Code__c
+    CEU_Amount__c: CEU_Amount__c
+    Course_End_Date__c: Course_End_Date__c
+    Course_Image__c: Course_Image__c
+    Course_Start_Date__c: Course_Start_Date__c
+    Enrollment_Target__c: Enrollment_Target__c
+    Featured_Course__c: Featured_Course__c
+    Format__c: Format__c
+    In_Person_Meetings__c: In_Person_Meetings__c
+    Index_Code__c: Index_Code__c
+    IsActive: IsActive
+    Product_Description__c: Product_Description__c
+    Product_SKU_Number__c: Product_SKU_Number__c
+    Product_Source__c: Product_Source__c
+    Retire_Date__c: Retire_Date__c
+    Sponsoring_College_School__c: Sponsoring_College_School__c
+    Start_Time__c: Start_Time__c
+    Storefront_Info_Page__c: Storefront_Info_Page__c
+    Summary_Display_Name__c: Summary_Display_Name__c
