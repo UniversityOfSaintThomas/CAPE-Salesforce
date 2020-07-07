@@ -36,6 +36,13 @@ tasks:
             path: scripts/create_pricebook.cls
             apex: addPricebookEntries();
 
+    deploy_site_config:
+        description: Deploys configuration for Development.
+        class_path: cumulusci.tasks.salesforce.Deploy
+        options:
+            namespace_inject: $project_config.project__package__namespace
+            path: unpackaged/config/site
+            unmanaged: True
 flows:
     config_qa:
         steps:
@@ -43,6 +50,8 @@ flows:
                 task: deploy_pricebook_records
             4:
                 task: create_pricebookentries
+            5:
+                task: deploy_site_config
 
     config_dev:
         steps:
@@ -50,3 +59,5 @@ flows:
                 task: deploy_pricebook_records
             4:
                 task: create_pricebookentries
+            5:
+                task: deploy_site_config
