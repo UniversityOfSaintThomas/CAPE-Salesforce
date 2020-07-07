@@ -1,23 +1,52 @@
 minimum_cumulusci_version: '3.14.0'
 project:
-    name: CAPE-Feed
+    name: CAPE
     package:
-        name:  CAPE-Feed
+        name:  CAPE
         api_version: '48.0'
     source_format: sfdx
 
 tasks:
     robot:
         options:
-            suites: robot/CAPE-Feed/tests
+            suites: robot/tests
             options:
-                outputdir: robot/CAPE-Feed/results
+                outputdir: robot/results
 
     robot_testdoc:
         options:
             path: robot/CAPE-Feed/tests
-            output: robot/CAPE-Feed/doc/CAPE-Feed_tests.html
+            output: robot/CAPE-Feed/doc/CAPE_tests.html
 
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+
+    deploy_pricebook_records:
+        description: Configure sample records for the Event app
+        class_path: cumulusci.tasks.bulkdata.load.LoadData
+        options:
+            mapping: datasets/dev/mapping.yml
+            sql_path: datasets/dev/data.sql
+
+    create_pricebookentries:
+        description: Setup the Custom Settings for the Event Site
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/create_pricebook.cls
+            apex: addPricebookEntries();
+
+flows:
+    config_qa:
+        steps:
+            3:
+                task: deploy_pricebook_records
+            4:
+                task: create_pricebookentries
+
+    config_dev:
+        steps:
+            3:
+                task: deploy_pricebook_records
+            4:
+                task: create_pricebookentries

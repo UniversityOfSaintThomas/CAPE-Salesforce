@@ -1,6 +1,7 @@
 {
-  "orgName": "CAPE-Feed - Dev Org",
+  "orgName": "CAPE - Dev Org",
   "edition": "Developer",
+  "features": ["sites"],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true

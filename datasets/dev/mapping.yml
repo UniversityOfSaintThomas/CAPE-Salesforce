@@ -9,7 +9,12 @@ Insert Product2:
     Course_End_Date__c: Course_End_Date__c
     Course_Image__c: Course_Image__c
     Course_Start_Date__c: Course_Start_Date__c
+    Description: Description
+    DisplayUrl: DisplayUrl
     Enrollment_Target__c: Enrollment_Target__c
+    ExternalDataSourceId: ExternalDataSourceId
+    ExternalId: ExternalId
+    Family: Family
     Featured_Course__c: Featured_Course__c
     Format__c: Format__c
     In_Person_Meetings__c: In_Person_Meetings__c
@@ -18,8 +23,11 @@ Insert Product2:
     Product_Description__c: Product_Description__c
     Product_SKU_Number__c: Product_SKU_Number__c
     Product_Source__c: Product_Source__c
+    ProductCode: ProductCode
+    QuantityUnitOfMeasure: QuantityUnitOfMeasure
     Retire_Date__c: Retire_Date__c
     Sponsoring_College_School__c: Sponsoring_College_School__c
     Start_Time__c: Start_Time__c
+    StockKeepingUnit: StockKeepingUnit
     Storefront_Info_Page__c: Storefront_Info_Page__c
     Summary_Display_Name__c: Summary_Display_Name__c
