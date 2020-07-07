@@ -43,6 +43,14 @@ tasks:
             namespace_inject: $project_config.project__package__namespace
             path: unpackaged/config/site
             unmanaged: True
+
+    deploy_permission_set:
+        description: Give System Admins Event Admin Permission Set
+        class_path: cumulusci.tasks.apex.anon.AnonymousApexTask
+        options:
+            path: scripts/create_pricebook.cls
+            apex: setGuestPermissionSet();
+
 flows:
     config_qa:
         steps:
@@ -52,6 +60,8 @@ flows:
                 task: create_pricebookentries
             5:
                 task: deploy_site_config
+            6:
+                task: deploy_permission_set
 
     config_dev:
         steps:
@@ -61,3 +71,5 @@ flows:
                 task: create_pricebookentries
             5:
                 task: deploy_site_config
+            6:
+                task: deploy_permission_set

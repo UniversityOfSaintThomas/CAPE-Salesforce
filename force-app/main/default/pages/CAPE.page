@@ -2,5 +2,8 @@
  - Created by Thad-PC-2019 on 7/7/2020.
  -->
 
-<apex:page id="CAPE">
+<apex:page id="CAPE" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false"  >
+    <script>
+        window.location.href = '/services/apexrest/capefeed?feedType=courselist';
+    </script>
 </apex:page>

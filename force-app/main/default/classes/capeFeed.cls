@@ -17,16 +17,16 @@ global with sharing class capeFeed {
         public String description { get; set; }
         public String link { get; set; }
         public String format { get; set; }
-        public Time startTime { get; set; }
-        public Datetime startDate { get; set; }
-        public Datetime endDate { get; set; }
+        public String startTime { get; set; }
+        public String startDate { get; set; }
+        public String endDate { get; set; }
         public String image { get; set; }
         public String alt { get; set; }
-        public Decimal ceus { get; set; }
+        public String ceus { get; set; }
         public String sponsor { get; set; }
-        public Boolean featured { get; set; }
-        public Date retireDate { get; set; }
-        public Decimal cost { get; set; }
+        public String featured { get; set; }
+        public String retireDate { get; set; }
+        public String cost { get; set; }
     }
 
     @HttpGet
@@ -65,29 +65,101 @@ global with sharing class capeFeed {
         query += ' SELECT Id, Product2.Id, Product2.Name, Product2.Product_Description__c, Product2.Storefront_Info_Page__c, ' +
                 ' Product2.Format__c, Product2.Start_Time__c, Product2.Course_Start_Date__c, Product2.Course_End_Date__c, ' +
                 ' Product2.Course_Image__c, Product2.CEU_Amount__c, Product2.Sponsoring_College_School__c, ' +
-                ' Product2.Featured_Course__c, Product2.Retire_Date__c, UnitPrice FROM PricebookEntry' +
-                ' WHERE PriceBook2.IsStandard=true';
+                ' Product2.Featured_Course__c, Product2.Retire_Date__c, UnitPrice FROM PricebookEntry ' +
+                ' WHERE PriceBook2.IsStandard=true ';
 
         List<PricebookEntry> pricebookEntries = new List<PricebookEntry>();
         pricebookEntries = database.query(query);
 
         for (PricebookEntry entry : pricebookEntries) {
             capeItem cape = new capeItem();
+
             cape.id = entry.Product2.Id;
-            cape.title = entry.Product2.Name;
-            cape.link = entry.Product2.Storefront_Info_Page__c;
-            cape.format = entry.Product2.Format__c;
-            cape.startTime = entry.Product2.Start_Time__c;
-            cape.startDate = entry.Product2.Course_Start_Date__c;
-            cape.endDate = entry.Product2.Course_End_Date__c;
-            cape.image = entry.Product2.Course_Image__c;
-            cape.alt = entry.Product2.Name;
-            cape.ceus = entry.Product2.CEU_Amount__c;
-            cape.sponsor = entry.Product2.Sponsoring_College_School__c;
-            cape.featured = entry.Product2.Featured_Course__c;
-            cape.description = entry.Product2.Product_Description__c;
-            cape.retireDate = entry.Product2.Retire_Date__c;
-            cape.cost = entry.UnitPrice;
+
+            if (String.isNotBlank(entry.Product2.Name)) {
+                cape.title = entry.Product2.Name;
+            } else {
+                cape.title = '';
+            }
+
+            if (String.isNotBlank(entry.Product2.Storefront_Info_Page__c)) {
+                cape.link = entry.Product2.Storefront_Info_Page__c;
+            } else {
+                cape.link = '';
+            }
+
+            If (String.isNotBlank(entry.Product2.Format__c)) {
+                cape.format = entry.Product2.Format__c;
+            } else {
+                cape.format = '';
+            }
+
+            if (entry.Product2.Start_Time__c != null) {
+                cape.startTime = String.valueOf(entry.Product2.Start_Time__c);
+            } else {
+                cape.startTime = '';
+            }
+
+            if (entry.Product2.Course_Start_Date__c != null) {
+                cape.startDate = String.valueOf(entry.Product2.Course_Start_Date__c);
+            } else {
+                cape.startDate = '';
+            }
+
+            if (entry.Product2.Course_End_Date__c != null) {
+                cape.endDate = String.valueOf(entry.Product2.Course_End_Date__c);
+            } else {
+                cape.endDate = '';
+            }
+
+            if (String.isNotBlank(entry.Product2.Course_Image__c)) {
+                cape.image = entry.Product2.Course_Image__c;
+            } else {
+                cape.image = '';
+            }
+
+            if (String.isNotBlank(entry.Product2.Name)) {
+                cape.alt = entry.Product2.Name;
+            } else {
+                cape.alt = '';
+            }
+
+            if (entry.Product2.CEU_Amount__c != null) {
+                cape.ceus = String.valueOf(entry.Product2.CEU_Amount__c);
+            } else {
+                cape.ceus = '';
+            }
+
+            if (String.isNotBlank(entry.Product2.Sponsoring_College_School__c)) {
+                cape.sponsor = entry.Product2.Sponsoring_College_School__c;
+            } else {
+                cape.sponsor = '';
+            }
+
+            if (entry.Product2.Featured_Course__c != null) {
+                cape.featured = String.valueOf(entry.Product2.Featured_Course__c);
+            } else {
+                cape.featured = '';
+            }
+
+            if (String.isNotBlank(entry.Product2.Product_Description__c)) {
+                cape.description = entry.Product2.Product_Description__c;
+            } else {
+                cape.description = '';
+            }
+
+            if (entry.Product2.Retire_Date__c != null) {
+                cape.retireDate = String.valueOf(entry.Product2.Retire_Date__c);
+            } else {
+                cape.retireDate = '';
+            }
+
+            if (entry.UnitPrice != null) {
+                cape.cost = String.valueOf(entry.UnitPrice);
+            } else {
+                cape.cost = '';
+            }
+
             capeItemList.add(cape);
         }
 

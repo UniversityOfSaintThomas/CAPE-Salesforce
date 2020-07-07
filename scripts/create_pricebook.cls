@@ -48,3 +48,28 @@ public static void addPricebookEntries() {
     }
 
 }
+
+public static void setGuestPermissionSet() {
+    String siteName = 'CAPE';
+
+    List<Site> site = [
+            SELECT GuestUserId
+            FROM Site
+            WHERE Name = :siteName
+    ];
+
+    if (site.size() > 0 ) {
+
+        //Add Permission set to all Admins
+        List<PermissionSet> eventPermissionSets = [SELECT Name, Id FROM PermissionSet WHERE Name = 'CAPE_Guest_User'];
+
+        List<PermissionSetAssignment> permissionSetList = new List<PermissionSetAssignment>();
+        if (!eventPermissionSets.isEmpty()) {
+            permissionSetList.add(new PermissionSetAssignment(PermissionSetId = eventPermissionSets[0].Id, AssigneeId = site[0].GuestUserId));
+        }
+        if (!permissionSetList.isEmpty()) {
+            upsert permissionSetList;
+        }
+    }
+
+}
