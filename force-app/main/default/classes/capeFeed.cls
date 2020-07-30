@@ -30,7 +30,7 @@ global with sharing class capeFeed {
     }
 
     @HttpGet
-    global static void getSummitEventsFeed() {
+    global static void getCAPEFeed() {
         feedType = RestContext.request.params.get('feedType');
 
         RestResponse res = RestContext.response;
@@ -44,17 +44,18 @@ global with sharing class capeFeed {
             res.addHeader('Content-Type', 'application/javascript');
         }
 
-        if (feedType.toLowerCase() == 'courselist') {
-            serializedJSON = JSON.serialize(getCapeItems());
-            serializedJSON = serializedJSON.replace('"endDate":', '"end":');
-        } else if (feedType.equalsIgnoreCase('parameterKey')) {
-            serializedJSON = JSON.serialize(getParameterLists());
-        }
+        if (String.isNotBlank(feedType)) {
+            if (feedType.toLowerCase() == 'courselist') {
+                serializedJSON = JSON.serialize(getCapeItems());
+                serializedJSON = serializedJSON.replace('"endDate":', '"end":');
+            } else if (feedType.equalsIgnoreCase('parameterKey')) {
+                serializedJSON = JSON.serialize(getParameterLists());
+            }
 
-        if (!String.isBlank(callback)) {
-            serializedJSON = callback + '(' + serializedJSON + ')';
+            if (!String.isBlank(callback)) {
+                serializedJSON = callback + '(' + serializedJSON + ')';
+            }
         }
-
         res.responseBody = Blob.valueOf(serializedJSON);
     }
 
@@ -103,14 +104,14 @@ global with sharing class capeFeed {
             viewEnd = String.valueOf(viewEndDate);
         }
 
-        if (String.isBlank(viewStart)) {
-            viewStart = String.valueOf(Date.today().addMonths(-1));
-        }
-
-        if (String.isBlank(viewEnd)) {
-            viewEnd = String.valueOf(Date.today().addMonths(1));
-        }
-
+//        if (String.isBlank(viewStart)) {
+//            viewStart = String.valueOf(Date.today().addMonths(-1));
+//        }
+//
+//        if (String.isBlank(viewEnd)) {
+//            viewEnd = String.valueOf(Date.today().addMonths(1));
+//        }
+//
 
         if (String.isNotBlank(req.params.get('retired'))) {
             retired = Boolean.valueOf(String.escapeSingleQuotes(RestContext.request.params.get('retired').trim()));
@@ -131,8 +132,9 @@ global with sharing class capeFeed {
         query += ' SELECT Id, Product2.Id, Product2.Name, Product2.Product_Description__c, Product2.Storefront_Info_Page__c, ' +
                 ' Product2.Format__c, Product2.Start_Time__c, Product2.Course_Start_Date__c, Product2.Course_End_Date__c, ' +
                 ' Product2.Course_Image__c, Product2.CEU_Amount__c, Product2.Sponsoring_College_School__c, ' +
-                ' Product2.Featured_Course__c, Product2.Retire_Date__c, UnitPrice FROM PricebookEntry ' +
-                ' WHERE PriceBook2.IsStandard = true ';
+                ' Product2.Featured_Course__c, Product2.Retire_Date__c, UnitPrice ';
+        query += ' FROM PricebookEntry ';
+        query += ' WHERE PriceBook2.IsStandard = true ';
 
         if (!retired) {
             query += ' AND Product2.Retire_Date__c >= ' + String.valueOf(Date.today()) + ' ';
@@ -174,8 +176,6 @@ global with sharing class capeFeed {
 
             if (String.isNotBlank(entry.Product2.Name)) {
                 cape.title = entry.Product2.Name;
-            } else {
-                cape.title = '';
             }
 
             if (String.isNotBlank(entry.Product2.Storefront_Info_Page__c)) {
@@ -216,8 +216,6 @@ global with sharing class capeFeed {
 
             if (String.isNotBlank(entry.Product2.Name)) {
                 cape.alt = entry.Product2.Name;
-            } else {
-                cape.alt = '';
             }
 
             if (entry.Product2.CEU_Amount__c != null) {
@@ -287,8 +285,8 @@ global with sharing class capeFeed {
     }
 
     private static String createMultiLikeStatement(String listIn, String objFieldName, String likeOrEqual) {
+        String listOut = '';
         if (String.isNotBlank(listIn)) {
-            String listOut = '';
             List<String> listInList = new List<String>();
             listInList = listIn.split(',');
             for (String listItem : listInList) {
@@ -299,9 +297,8 @@ global with sharing class capeFeed {
                 }
             }
             listOut = listOut.removeEnd(' OR ');
-            return listOut;
         }
-        return '';
+        return listOut;
     }
 
 
