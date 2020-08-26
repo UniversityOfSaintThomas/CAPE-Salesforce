@@ -57,6 +57,7 @@ global with sharing class capeFeed {
             }
         }
         res.responseBody = Blob.valueOf(serializedJSON);
+
     }
 
     private static List<capeItem> getCapeItems() {
@@ -135,6 +136,8 @@ global with sharing class capeFeed {
                 ' Product2.Featured_Course__c, Product2.Retire_Date__c, UnitPrice ';
         query += ' FROM PricebookEntry ';
         query += ' WHERE PriceBook2.IsStandard = true ';
+        query += ' AND PriceBook2.IsStandard = true ';
+        query += ' AND Product2.IsActive = true ';
 
         if (!retired) {
             query += ' AND Product2.Retire_Date__c >= ' + String.valueOf(Date.today()) + ' ';
@@ -209,7 +212,21 @@ global with sharing class capeFeed {
             }
 
             if (String.isNotBlank(entry.Product2.Course_Image__c)) {
-                cape.image = entry.Product2.Course_Image__c;
+                string IMG_SRC_PATTERN = 'src="([^"]+)"';
+                pattern p = pattern.compile(IMG_SRC_PATTERN);
+                matcher m = p.matcher(entry.Product2.Course_Image__c);
+                String imageSrc = '';
+                if(m.find()) {
+                    imageSrc = m.group(1);
+                }
+                imageSrc = imageSrc.replaceAll('&amp;','&');
+                if (String.isNotBlank(imageSrc)) {
+                    String domain = URL.getSalesforceBaseUrl().toExternalForm();
+                    If (!imageSrc.containsIgnoreCase('https://'+domain)) {
+                       imageSrc = domain + imageSrc;
+                    }
+                }
+                cape.image = imageSrc;
             } else {
                 cape.image = '';
             }
