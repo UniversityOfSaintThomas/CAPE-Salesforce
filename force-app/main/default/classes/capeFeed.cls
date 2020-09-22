@@ -27,6 +27,7 @@ global with sharing class capeFeed {
         public String featured { get; set; }
         public String retireDate { get; set; }
         public String cost { get; set; }
+        public String startDetails {get;set;}
     }
 
     @HttpGet
@@ -133,14 +134,13 @@ global with sharing class capeFeed {
         query += ' SELECT Id, Product2.Id, Product2.Name, Product2.Product_Description__c, Product2.Storefront_Info_Page__c, ' +
                 ' Product2.Format__c, Product2.Start_Time__c, Product2.Course_Start_Date__c, Product2.Course_End_Date__c, ' +
                 ' Product2.Course_Image__c, Product2.CEU_Amount__c, Product2.Sponsoring_College_School__c, ' +
-                ' Product2.Featured_Course__c, Product2.Retire_Date__c, UnitPrice ';
+                ' Product2.Featured_Course__c, Product2.Retire_Date__c, UnitPrice, Product2.No_of_Meetings_Start_Details__c ';
         query += ' FROM PricebookEntry ';
         query += ' WHERE PriceBook2.IsStandard = true ';
-        query += ' AND PriceBook2.IsStandard = true ';
         query += ' AND Product2.IsActive = true ';
 
         if (!retired) {
-            query += ' AND Product2.Retire_Date__c >= ' + String.valueOf(Date.today()) + ' ';
+            query += ' AND ( Product2.Retire_Date__c >= ' + String.valueOf(Date.today()) + ' OR Product2.Retire_Date__c = null)';
         }
 
         System.debug(viewStart + '  ? ' + viewEnd);
@@ -164,6 +164,7 @@ global with sharing class capeFeed {
         if (String.isNotBlank(sponsor)) {
             query += 'AND (' + createMultiLikeStatement(sponsor, 'Product2.Sponsoring_College_School__c', 'equal') + ') ';
         }
+
 
         List<PricebookEntry> pricebookEntries = new List<PricebookEntry>();
 
@@ -245,6 +246,12 @@ global with sharing class capeFeed {
                 cape.sponsor = entry.Product2.Sponsoring_College_School__c;
             } else {
                 cape.sponsor = '';
+            }
+
+            if(String.isNotBlank(entry.Product2.No_of_Meetings_Start_Details__c)) {
+                cape.startDetails = entry.Product2.No_of_Meetings_Start_Details__c;
+            } else {
+                cape.startDetails = '';
             }
 
             if (entry.Product2.Featured_Course__c != null) {

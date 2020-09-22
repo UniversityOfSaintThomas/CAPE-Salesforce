@@ -88,6 +88,8 @@ public with sharing class capeFeed_TEST {
             product.Name = 'Course-' + String.valueOf(x);
             product.Start_Time__c = Time.newInstance(8, 0, 0, 0);
             product.Index_Code__c = indexCodes[indexCount];
+            product.IsActive = true;
+            product.Course_Image__c = '<img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"/>';
             if (even) {
                 product.Course_Start_Date__c = Date.today().addMonths(-x);
                 product.Course_End_Date__c = Date.today().addMonths(x);
@@ -119,7 +121,7 @@ public with sharing class capeFeed_TEST {
         System.debug(JSON.serializePretty(products));
         insert products;
 
-        //Create pricebook enteries
+        //Create pricebook entries
         List<PricebookEntry> pricebookEntries = new LIst<PricebookEntry>();
         for (Product2 prod : products) {
             PricebookEntry pbe = new PricebookEntry();
@@ -136,6 +138,7 @@ public with sharing class capeFeed_TEST {
         }
         System.debug(JSON.serializePretty(pricebookEntries));
         insert pricebookEntries;
+
     }
 
     private static void getFeeds(String feedType, String filter, String sponsor, String format, String retired, String months, String viewStart, String viewEnd) {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>No_of_Meetings_Start_Details__c</fullName>
+    <description>Number of times this course meets or when the course starts</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Number of times this course meets or when the course starts</inlineHelpText>
+    <label>No. of  Meetings/Start Details</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

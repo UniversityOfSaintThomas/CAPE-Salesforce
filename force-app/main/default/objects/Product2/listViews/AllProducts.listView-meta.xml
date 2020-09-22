@@ -3,10 +3,14 @@
     <fullName>AllProducts</fullName>
     <columns>PRODUCT2.NAME</columns>
     <columns>PRODUCT2.CUSTOMER_PRODUCT_ID</columns>
-    <columns>PRODUCT2.FAMILY</columns>
+    <columns>Format__c</columns>
     <columns>Activity_Code__c</columns>
+    <columns>No_of_Meetings_Start_Details__c</columns>
     <columns>Index_Code__c</columns>
     <columns>Course_Start_Date__c</columns>
+    <columns>PRODUCT2.ACTIVE</columns>
+    <columns>Sponsoring_College_School__c</columns>
+    <columns>Retire_Date__c</columns>
     <filterScope>Everything</filterScope>
     <label>All Products</label>
     <language>en_US</language>
