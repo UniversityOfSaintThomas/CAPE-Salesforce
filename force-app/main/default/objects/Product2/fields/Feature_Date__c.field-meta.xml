@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Feature_Date__c</fullName>
+    <defaultValue>TODAY()</defaultValue>
+    <description>Date the program should start being featured on the website. Newer dates will be pulled to the top of the list, so if a program should get pulled up, change the date to a newer/future date.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Date that will filter the programs. The newer dates will be pulled to the top of the list.</inlineHelpText>
+    <label>Feature Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>
