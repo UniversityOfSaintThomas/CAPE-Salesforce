@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>capeFeed2</members>
+        <members>capeFeed2_TEST</members>
         <members>capeFeed</members>
         <members>capeFeed_TEST</members>
         <name>ApexClass</name>

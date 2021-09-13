@@ -4,6 +4,6 @@
 
 <apex:page id="CAPE" showHeader="false" sidebar="false" standardStylesheets="false" docType="html-5.0" cache="false"  >
     <script>
-        window.location.href = '/services/apexrest/capefeed?feedType=courselist';
+        window.location.href = '/services/apexrest/capefeed2?feedType=courselist';
     </script>
 </apex:page>
